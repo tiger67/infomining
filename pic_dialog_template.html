@@ -1,0 +1,71 @@
+<style>
+    #image-dialog {
+        width:100%;
+        max-width: 100%;
+        min-width: 100%;
+        max-height:100%;
+        min-height:100%;
+        height:100%;
+        line-height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    #image-dialog .images_btn {
+        color: rgba(255, 255, 255, 0.7);
+        background: rgba(0, 0, 0, 0.2);
+        line-height: 20px;;
+        text-align: center;
+    }
+
+    #image-dialog .images_close_btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+    }
+
+    #image-dialog .images_last_btn {
+        position: absolute;
+        top: 40%;
+        left: 0px;
+        font-size: 100px;
+        width: 62px;
+        height: 100px;
+    }
+
+    #image-dialog .images_next_btn {
+        position: absolute;
+        top: 40%;
+        right: 0px;
+        font-size: 100px;
+        width: 62px;
+        height: 100px;
+    }
+
+    #image-dialog .images_btn:hover {
+        background: rgba(0, 0, 0, 0.6);
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    #image-dialog .images_content {
+        margin: auto;
+        max-width: 95%;
+        max-height: 98%;
+        vertical-align: middle;
+    }
+</style>
+<md-dialog id="image-dialog" aria-label="image-dialog">
+    <a href="javascript:void(0)" ng-click="last()">
+        <md-icon md-svg-icon="image:navigate_before" class="images_btn images_last_btn"></md-icon>
+    </a>
+    <a href="javascript:void(0)" ng-click="next()">
+        <md-icon md-svg-icon="image:navigate_next" class="images_btn images_next_btn"></md-icon>
+    </a>
+    <a href="javascript:void(0)" ng-click="close()">
+        <md-icon md-svg-icon="navigation:close" class="images_btn images_close_btn"></md-icon>
+    </a>
+    <md-dialog-content style="height:100%;"layout="column" layout-align="center center">
+        <img ng-src="{{attachment.content_origin}}" class="images_content">
+    </md-dialog-content>
+</md-dialog>

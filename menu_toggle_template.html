@@ -1,0 +1,22 @@
+<md-button class="md-button-toggle" style="outline:none;"
+           ng-class="{'toggled' : isOpen(),'md-whiteframe-z1':isOpen()}"
+           id="{{section.time}}"
+           ng-click="toggle()"
+           aria-controls="side-menu-{{section.name | nospace}}"
+           layout="row"
+           aria-expanded="{{isOpen()}}">
+    <div layout="row" layout-align="center center">
+        <div>{{section.name}}</div>
+        <div style="margin-left: 24px;">{{section.time}}</div>
+    </div>
+    <div>
+        <md-icon md-svg-icon="navigation:expand_more"
+                 class="md-toggle-icon" ng-class="{'toggled' : isOpen()}" layout-align="end center">
+        </md-icon>
+    </div>
+</md-button>
+<ul ng-show="isOpen()" id="side-menu-{{section.name | nospace}}" class="menu-toggle-list">
+    <li ng-repeat="item in section.items" id="{{item.taskid}}">
+        <menu-link section="item"></menu-link>
+    </li>
+</ul>

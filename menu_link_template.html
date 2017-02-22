@@ -1,0 +1,34 @@
+<div style="padding:16px;cursor: pointer;outline:none;" ui-sref="{{section.url}}"
+     ng-class="{true:'menu-list-selected'}[section.selected]" ng-click="focusSection()"  >
+    <div layout="column" >
+        <div layout="row" style=" position: relative" class="menu_left">
+            <h4 style="width:18px;height: 18px; background-size: contain; margin-right: 5px;margin-top:2px;" class="md-title"
+                ng-class="{ 'rapid_response':'rapid-response',
+                            'conversation' : 'conversation',
+                            'around_you' : 'around-you',
+                            'poll' : 'poll'
+                            }[section.module]">
+            </h4>
+            <h4 style="width:220px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                {{section| humanizeDoc}}
+
+            </h4>
+            <!--<span ng-if="section.flag" class="menu_left_task_ouverdue_tip">{{section.info}}</span>-->
+            <span ng-if="section.flag && section.status!='lock'" ><md-icon
+                    md-svg-icon="image:timer_off"></md-icon></span>
+            <span ng-if="section.flag  && section.status=='lock'" ><md-icon
+                    md-svg-icon="action:lock"></md-icon></span>
+        </div>
+        <div style="margin-top: 5px;"   ng-class="{true:'menu-list-selected-border'}[section.selected]">
+            <md-progress-linear md-mode='determinate' value="{{section.progress}}" ></md-progress-linear>
+            <md-tooltip md-direction="right">{{section.progress}}%</md-tooltip>
+        </div>
+    </div>
+    <md-tooltip md-direction="right">
+        {{section | humanizeDoc}}
+    </md-tooltip>
+  <span class="md-visually-hidden "
+        ng-if="isSelected()">
+    current page
+  </span>
+</div>

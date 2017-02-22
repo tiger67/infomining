@@ -1,0 +1,165 @@
+<style type="text/css">
+    .img_upload_pnl .md-button.md-icon-button {
+        height: auto;
+        width: auto;
+    }
+
+    .img_upload_con {
+        width: 720px;
+        height: 485px;
+        background: #fbfbfb;
+        overflow: auto;
+        padding-bottom: 10px;
+    }
+</style>
+<md-dialog aria-label="img_upload_pnl" class="img_upload_pnl" ng-cloak>
+    <form>
+
+        <style type="text/css">
+            .img_upload_he {
+                height: 58px;
+                line-height: 58px;
+                border-bottom: 1px solid #eee;
+                text-align: center;
+                padding: 0px 5px;
+            }
+
+            .img_upload_he > .md-title {
+                color: #888;
+                font-size: 18px;
+                font-weight: 300;
+                vertical-align: middle;
+            }
+
+            .img_upload_he > .md-button.md-icon-button > md-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .img_upl_icell {
+                width: 170px;
+                height: 170px;
+                margin-top: 5px;
+                margin-right: 5px;
+                background: #f5f5f5;
+                float: left;
+                line-height: 170px;
+                position: relative;
+                outline: none;
+                text-align: center;
+                font-size: 15px;
+            }
+
+            .img_upl_icell > md-icon {
+                width: 45px;
+                height: 45px;
+                position: absolute;
+                top: 53px;
+                left: 60px;
+            }
+
+            .img_upl_btn_wrap {
+                display: inline-block;
+                vertical-align: middle;
+                width: 80px;
+                text-align: center;
+                font-size: 15px;
+                font-weight: 300;
+                line-height: 1.5em;
+                position: relative;
+            }
+            .hide_bg {
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                bottom: 30px;
+                right: 0px;
+                opacity: 0;
+                height: 0px;
+                visibility: hidden;
+            }
+            .i_select_tip {
+                width: 42px;
+                height: 42px;
+                position: absolute;
+                left: 8px;
+                top: 11px;
+            }
+            .img_upl_icell.choosed > .i_select_tip {
+                background: url(./assets/images/img-upload/img-choosed.png) center;
+            }
+            .img_upl_icell.notchoosed > .i_select_tip {
+                background: url(./assets/images/img-upload/img-notchoosed.png) center;
+            }
+            .outlayer {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0);
+                left: 0px;
+                top: 0px;
+            }
+            .img-delete-icon {
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                z-index: 10;
+                background-color: rgba(0,0,0,0.4);
+                cursor: pointer;
+                outline: none;
+            }
+            .img-delete-icon:hover{
+                background-color: rgba(0,0,0,0.5);
+            }
+            .img-delete-icon md-icon{
+                width: 28px;
+                height: 28px;
+                color: #eee;
+                position: absolute;
+                right: 5px;
+                top: 4px;
+            }
+            .loading{
+                position: absolute;
+                width:100%;
+                height:100%;
+                top:0px;
+                left:0px;
+                background: url(./assets/images/experiencer/image_upload/loading.gif) center no-repeat;
+            }
+        </style>
+        <div class=" img_upload_he" layout="row">
+            <md-button class="md-icon-button" aria-label="close dialog"
+                       ng-click="answer({files:imageFiles,status:'no'})">
+                <md-icon md-svg-icon="navigation:close"></md-icon>
+            </md-button>
+            <span class="md-title" flex>已选择{{imageFiles.length}}张图片<span>{{config.showMsg}}</span></span>
+            <md-button ng-disabled="isuploading" class="md-icon-button" aria-label="choose" ng-click="answer({files:imageFiles,status:'ok'})">
+                <md-icon md-svg-icon="action:done"></md-icon>
+            </md-button>
+        </div>
+        <div class="height"></div>
+        <div class="img_upload_con self_scrollbar" style="text-align: center">
+            <md-button class="img_upl_icell" style="margin-bottom: 0;margin-left: 0" ng-click="selectPhotos()"
+                       aria-label="select photos">
+                <md-icon md-svg-icon="file:file_upload"></md-icon>
+                <span style="position: absolute;top: 60px;left: 53px;line-height: 100px;">上传图片</span>
+            </md-button>
+            <input type="file" multiple class="hide_bg" isuploading="isuploading" files="imageFiles" config="config" id="upload_images"
+                   image-input-model>
+
+            <div ng-repeat="p in imageFiles" class="img_upl_icell">
+                <div ng-show="!p.fileData" class="loading"></div>
+                <span>
+                    <img ng-src="{{p.fileData}}" img-show="170,170">
+                </span>
+                <div class="img-delete-icon" ng-click="imageFiles.splice($index,1)" >
+                    <md-icon   md-svg-icon="action:delete"></md-icon>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</md-dialog>

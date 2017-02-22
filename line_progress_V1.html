@@ -1,0 +1,63 @@
+
+    <style type="text/css">
+        .progress_v1{
+            background: #eee;
+            height:10px;
+            position: relative;
+            cursor: pointer;
+        }
+        /* Tooltip */
+        .tooltip-content {
+            position: absolute;
+            z-index: 9999;
+            bottom: 100%;
+            font-size:15px;
+            line-height: 30px;
+            box-shadow: -5px -5px 15px rgba(48,54,61,0.2);
+            background: #2dc3e8;
+            border-radius: 4px;
+            opacity: 0;
+            color: #fff;
+            cursor: default;
+            pointer-events: none;
+            width:70px;
+            height:28px;
+            white-space:nowrap;
+            text-align:center;
+        }
+        .tooltip-content::after {
+            content: '';
+            top: 100%;
+            left: calc(50% - 1px);
+            border: solid transparent;
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: transparent;
+            border-top-color: #2dc3e8;
+            border-width: 7px;
+            margin-left: -7px;
+        }
+
+        .progress_value{
+            position: absolute;
+            top:0;
+            bottom:0;
+            left: 0;
+            width:27%;
+            background:#2dc3e8;
+        }
+
+        .progress_v1:hover .tooltip-content {
+            -webkit-transform: translate3d(0,-10px,0);
+            transform: translate3d(0,-10px,0);
+            -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 1;
+        }
+    </style>
+    <div class="progress_v1">
+        <div class="tooltip-content">{{value}}%</div>
+        <div class="progress_value"></div>
+    </div>
