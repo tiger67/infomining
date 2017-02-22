@@ -1,0 +1,94 @@
+<style type="text/css">
+    .pcp_t {
+        padding-left: 84px;
+        padding-right: 40px;
+        position: relative;
+        height: 60px;
+        background: #fff;
+        color: #666;
+        line-height: 60px;
+    }
+
+    .pcp_t .title {
+        font-size: 20px;
+    }
+
+    .loginer_phone {
+        position: absolute;
+        right: 48px;
+        top: 10px;
+    }
+
+    .loginer_phone > img {
+        display: block;
+        padding: 0px;
+        background: #fff;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+    }
+
+    .hd2 {
+        background: #ff9800;
+        height: 45px;
+        color: #fff;
+    }
+
+    .hd2 .md-button {
+        margin-left: 87px;
+        font-size: 16px;
+    }
+
+    /*头部跟项目管理页公共样式*/
+    .pcp_t .pm_top {
+        text-align: right;
+        padding-right: 42px;
+    }
+
+    .pcp_t > .pm_top > .md-button.md-fab.md-mini {
+        background: #737373;
+    }
+
+    .pcp_t > .pm_top > .md-button.md-fab md-icon {
+        color: #fff;
+        width: 12px;
+        height: 12px;
+    }
+
+    .pcp_t .user_name {
+        color: #808080;
+        /* font-size:14px;
+         display: inline-block;
+         margin:0px 12px 0px 0px;
+         position: relative;
+         top:5px;*/
+    }
+
+</style>
+<div class="pcp_t" layout="row">
+    <span class="title">
+       {{title}}
+    </span>
+
+    <div class="pm_top" flex="flex">
+        <span class="user_name">{{username}}</span>
+        <md-button class="md-fab md-mini" aria-label="email">
+            <md-icon md-svg-icon="communication:email"></md-icon>
+        </md-button>
+        <md-button class="md-fab md-mini" aria-label="notification">
+            <md-icon md-svg-icon="social:notifications"></md-icon>
+        </md-button>
+        <img src="{{portarait}}" class="user_portait">
+    </div>
+    <!--<div class="loginer_phone">
+        <img ng-src="{{portarait}}" />
+    </div>-->
+</div>
+<div class="hd2">
+    <md-button go-page="project_home">
+        <div flex layout="row">
+            <md-icon md-svg-icon="content:reply_all" style="color:#fff;"></md-icon>
+            <span>返回首页</span>
+        </div>
+    </md-button>
+</div>

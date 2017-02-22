@@ -1,0 +1,79 @@
+<style type="text/css">
+    md-dialog {
+        width: 430px;
+        height: 380px;
+    }
+    md-toolbar {
+        height: 40px;
+        min-height: 40px;
+    }
+    md-dialog md-dialog-content{
+        overflow:hidden;
+    }
+
+    md-toolbar .md-toolbar-tools {
+        height: 40px;
+    }
+    md-dialog.md-content-overflow .md-actions, md-dialog.md-content-overflow md-dialog-actions{
+        border-top-width:0px;
+    }
+    md-dialog-content{
+        padding:10px 25px;
+    }
+</style>
+<md-dialog id="addexist_dialog">
+    <form name="rpdFrom">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h4 style="font-size: 18px">添加研究员</h4>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content >
+            <div layout="column" flex>
+            <md-input-container md-no-float flex>
+                <md-icon md-svg-src="hardware:phone_android"></md-icon>
+                <input ng-model="exist.phonenumber" name="tel" type="text" ng-required="havevalue=='false'" placeholder="手机号码"
+                       ng-pattern="/^[1]\d{10}$/" ng-keyup="existvalue(exist.phonenumber)"/>
+                <div ng-messages="rpdFrom.tel.$error">
+                    <div ng-message="pattern">
+                        请输入11位手机号码
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container md-no-float flex>
+                <md-icon md-svg-src="communication:email"></md-icon>
+                <input ng-model="exist.email" name="email" type="text" ng-required="havevalue=='false'" ng-keyup="existvalue(exist.email)"
+                       ng-pattern="/\w+@\w+(-\w+)*(\.\w+)+/" placeholder="email"/>
+                <div ng-messages="rpdFrom.email.$error">
+                    <div ng-message="pattern">
+                        邮箱填写错误
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container md-no-float flex style="padding-left: 36px">
+                <md-icon md-svg-src="action:account_circle"></md-icon>
+                <md-select ng-model="exist.roler" required name="roler"
+                           placeholder="角色">
+                    <md-option  value="EXPERIENCER">体验者</md-option>
+                    <md-option value="OBSERVER">观察者</md-option>
+                </md-select>
+            </md-input-container>
+            </div>
+            <div flex layout="row" class="md-actions" style="margin-top: 3%">
+                <md-button class="md-raised"  ng-click="cancel()">
+                    <label>
+                        取消
+                    </label>
+                </md-button>
+                <md-button class="md-raised" ng-click="addExist()" ng-disabled="!rpdFrom.$valid">
+                    <label>
+                        添加
+                    </label>
+                </md-button>
+            </div>
+        </md-dialog-content>
+    </form>
+
+</md-dialog>

@@ -1,0 +1,22 @@
+<style type="text/css">
+    .no_btn.md-button:hover,.no_btn.md-button{
+        background:rgb(255,82,82);
+        color:#fff;
+    }
+    .yes_btn.md-button:hover,.yes_btn.md-button{
+        background: #aaa;
+        color:#888;
+        margin-left:20px;
+    }
+</style>
+<md-dialog  style="width:450px">
+    <md-dialog-content style="text-align: center">
+        <div class="md-dialog-content-body" style="margin:40px auto;line-height:30px;font-size:16px;">
+            {{stepWarnInfo}}
+        </div>
+ </md-dialog-content>
+    <md-dialog-actions  style="margin-bottom:10px;margin-right:10px">
+        <md-button class="no_btn" ng-click="no()">取消</md-button>
+        <md-button  class="yes_btn" ng-click="yes()">终止项目</md-button>
+    </md-dialog-actions>
+</md-dialog>

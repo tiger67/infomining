@@ -1,0 +1,87 @@
+<div class="comment-panel" ng-init="getPortrait(currentUser)">
+    <div class="layout layout-row input-area" ng-hide="isOverdue.flag">
+        <div>
+            <img ng-src="{{currentUser.currentPortrait}}"/>
+        </div>
+        <div>
+            <md-input-container md-no-float flex class="md-block">
+                <input ng-model="event.content" name="content" placeholder="我想说..." ng-focus="event.isFocus=true"
+                       ng-blur="event.isFocus=false" ng-keydown="$event.keyCode == 13&&submitComment($event)"
+                       aria-label="input comment content" ng-disabled="isOverdue.flag===true"/>
+
+            </md-input-container>
+            <md-tooltip ng-if="event.isFocus" md-visible="true" md-autohide="false" md-direction="right">按回车键提交
+            </md-tooltip>
+        </div>
+    </div>
+    <div class="comments">
+        <div ng-repeat="comment in comments| limitTo: showCommentCount">
+            <div class="layout layout-row" style="padding: 5px 0;">
+                <div class="layout layout-column" ng-init="getPortrait(comment)">
+                    <img ng-src="{{comment.currentPortrait}}" style="width: 36px;height: 36px;border-radius: 50%"/>
+                </div>
+                <div class="comment-content" layout="column">
+                    <div layout="row">
+                        <p style="margin: 0">
+                            <span>
+                                <span ng-if="comment.commentid_previous!==''">
+                                <a href="">{{comment.display_name}}</a>对<a href="">{{comment.display_name_previous}}</a>
+                                    的评论
+                                </span>
+                                <a href="" ng-if="comment.commentid_previous===''">{{comment.display_name}}</a>
+                            </span>
+                            <span class="content" ng-bind-html="comment.content|to_trusted"></span>
+                        </p>
+                    </div>
+                    <div class="comment-tools" layout="row">
+                        <a href="" ng-click="showComment(comment.commentid)" ng-if="isOverdue.flag!==true">评论</a>
+                        <a href="" ng-if="isOverdue.flag===true" style="color:rgba(0,0,0,0.26);">评论</a>
+                        <a href="" ng-if="isOverdue.flag!==true&&comment.attitude_like.indexOf(currentUser.userid)===-1"
+                           ng-click="like(comment)">
+                            {{'点赞'+(comment.attitude_like.length>0?comment.attitude_like.length:'')}}
+                        </a>
+                        <a href="" ng-if="isOverdue.flag===true&&comment.attitude_like.indexOf(currentUser.userid)===-1"
+                           style="color:rgba(0,0,0,0.26);">
+                            {{'点赞'+(comment.attitude_like.length>0?comment.attitude_like.length:'')}}
+                        </a>
+                        <a href="" ng-if="isOverdue.flag!==true&&comment.attitude_like.indexOf(currentUser.userid)>-1"
+                           ng-click="removeLike(comment)">
+                            {{'已赞'+(comment.attitude_like.length>0?comment.attitude_like.length:'')}}</a>
+                        <a href="" ng-if="isOverdue.flag===true&&comment.attitude_like.indexOf(currentUser.userid)>-1"
+                           style="color:rgba(0,0,0,0.26);">
+                            {{'已赞'+(comment.attitude_like.length>0?comment.attitude_like.length:'')}}</a>
+                        <span style="font-size: 10px;color: #ababab">{{comment.time}}</span>
+                    </div>
+                    <div ng-if="selectComment===comment.commentid">
+                        <div class="layout layout-row input-area comment-previous">
+                            <div>
+                                <img ng-src="{{currentUser.currentPortrait}}"/>
+                            </div>
+                            <div>
+                                <md-input-container md-no-float flex class="md-block" ng-init="comment.isFocus=false">
+                                    <input ng-model="event.content_previous" name="content"
+                                           placeholder="我想对{{comment.display_name}}说" ng-focus="comment.isFocus=true"
+                                           ng-blur="comment.isFocus=false"
+                                           ng-keydown="$event.keyCode == 13&&submitComment($event,comment.commentid,comment.userid)"
+                                           aria-label="input comment content"/>
+                                    <md-tooltip ng-if="comment.isFocus" md-visible="true" md-autohide="false"
+                                                md-direction="right">按回车键提交
+                                    </md-tooltip>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" layout-align="space-between center">
+        <div>
+            <a href="" ng-click="showCommentCount=showCommentCount+5>commentTotal?commentTotal:showCommentCount+5">查看之前的评论</a>
+        </div>
+        <div>
+            {{showCommentCount}}/{{commentTotal}}
+        </div>
+    </div>
+</div>
